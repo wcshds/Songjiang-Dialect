@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>松江话简查</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module" src="/js/initialize.js"></script>
+    <style>
+        table {
+            border: 1px solid rgb(128, 128, 128);
+            line-height: 24px;
+            border-collapse: collapse;
+            width: auto;
+        }
+
+        tr {
+            border: 1px solid rgb(128, 128, 128);
+        }
+
+        td,
+        th {
+            border: 1px solid rgb(128, 128, 128);
+            padding: 6px 13px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 松江话语音 -->
+        <h1>简查</h1>
+        <form>
+            <p>
+                <input type="text" placeholder="请输入文字">
+                <button>查询</button>
+            </p>
+            <p>
+                <input type="radio" name="mode" id="hanzi" value="hanzi" v-model="mode"><label
+                    for="hanzi"><span>单字</span></label>
+                <input type="radio" name="mode" id="word" value="word" v-model="mode"><label
+                    for="word"><span>词汇</span></label>
+                <input type="radio" name="mode" id="sentence" value="sentence" v-model="mode"><label
+                    for="sentence"><span>句子</span></label>
+            </p>
+        </form>
+
+        <div class="single-hanzi" v-show="mode === 'hanzi'">
+
+            <h3>松江小片（老年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>单字</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ songjiang[0][hanziNum - 1].code }}</td>
+                        <td>{{ songjiang[0][hanziNum - 1].hanzi }}</td>
+                        <td>{{ songjiang[0][hanziNum - 1].remark }}</td>
+                        <td>{{ songjiang[0][hanziNum - 1].syllable }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h3>松江小片（青年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>单字</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ songjiang[1][hanziNum - 1].code }}</td>
+                        <td>{{ songjiang[1][hanziNum - 1].hanzi }}</td>
+                        <td>{{ songjiang[1][hanziNum - 1].remark }}</td>
+                        <td>{{ songjiang[1][hanziNum - 1].syllable }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h3>市区片（老年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>单字</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ puxizhongxin[0][hanziNum - 1].code }}</td>
+                        <td>{{ puxizhongxin[0][hanziNum - 1].hanzi }}</td>
+                        <td>{{ puxizhongxin[0][hanziNum - 1].remark }}</td>
+                        <td>{{ puxizhongxin[0][hanziNum - 1].syllable }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h3>市区片（青年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>单字</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ puxizhongxin[1][hanziNum - 1].code }}</td>
+                        <td>{{ puxizhongxin[1][hanziNum - 1].hanzi }}</td>
+                        <td>{{ puxizhongxin[1][hanziNum - 1].remark }}</td>
+                        <td>{{ puxizhongxin[1][hanziNum - 1].syllable }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="word" v-show="mode === 'word'">
+
+            <h3>松江小片（老年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>词汇</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                        <th>说法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ songjiang[2][wordNum - 1].code }}</td>
+                        <td>{{ songjiang[2][wordNum - 1].word }}</td>
+                        <td>{{ songjiang[2][wordNum - 1].remark }}</td>
+                        <td>{{ songjiang[2][wordNum - 1].syllable }}</td>
+                        <td>{{ songjiang[2][wordNum - 1].note }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h3>市区片（老年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>词汇</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                        <th>说法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ puxizhongxin[2][wordNum - 1].code }}</td>
+                        <td>{{ puxizhongxin[2][wordNum - 1].word }}</td>
+                        <td>{{ puxizhongxin[2][wordNum - 1].remark }}</td>
+                        <td>{{ puxizhongxin[2][wordNum - 1].syllable }}</td>
+                        <td>{{ puxizhongxin[2][wordNum - 1].note }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="sentence" v-show="mode === 'sentence'">
+
+            <h3>松江小片（老年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>例句</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ songjiang[3][sentenceNum - 1].code }}</td>
+                        <td>{{ songjiang[3][sentenceNum - 1].sentence }}</td>
+                        <td>{{ songjiang[3][sentenceNum - 1].remark }}</td>
+                        <td>{{ songjiang[3][sentenceNum - 1].syllable }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h3>市区片（老年男性）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>例句</th>
+                        <th>注例</th>
+                        <th>读音</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ puxizhongxin[3][sentenceNum - 1].code }}</td>
+                        <td>{{ puxizhongxin[3][sentenceNum - 1].sentence }}</td>
+                        <td>{{ puxizhongxin[3][sentenceNum - 1].remark }}</td>
+                        <td>{{ puxizhongxin[3][sentenceNum - 1].syllable }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <button @click="minusNum" :disabled="minusButtonIsDisabled">上一页</button>
+        <input type="text" v-model="hanziNum" v-show="mode === 'hanzi'">
+        <input type="text" v-model="wordNum" v-show="mode === 'word'">
+        <input type="text" v-model="sentenceNum" v-show="mode === 'sentence'">
+        <button @click="addNum" :disabled="addButtonIsDisabled">下一页</button>
+    </div>
+
+
+    <script type="module">
+        import { songjiang, puxizhongxin } from './js/initialize.js';
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                mode: "hanzi",
+                songjiang: songjiang,
+                puxizhongxin: puxizhongxin,
+                hanziNum: 1,
+                wordNum: 1,
+                sentenceNum: 1,
+                addButtonIsDisabled: false,
+                minusButtonIsDisabled: true
+            },
+            methods: {
+                validate: function (target, limit) {
+                    if (target >= 2 && target <= limit - 1) {
+                        this.addButtonIsDisabled = false;
+                        this.minusButtonIsDisabled = false;
+                    } else if (target === 1 ) {
+                        this.addButtonIsDisabled = false;
+                        this.minusButtonIsDisabled = true;
+                    } else if (target === limit ) {
+                        this.addButtonIsDisabled = true;
+                        this.minusButtonIsDisabled = false;
+                    }
+                },
+                addNum: function () {
+                    if (this.mode === "hanzi") {
+                        this.hanziNum *= 1;
+                        let temp = this.hanziNum + 1;
+                        if (temp <= 1000) { this.hanziNum = temp };
+                    } else if (this.mode === "word") {
+                        this.wordNum *= 1;
+                        let temp = this.wordNum + 1;
+                        if (temp <= 1200) { this.wordNum = temp };
+                    } else if (this.mode === "sentence") {
+                        this.sentenceNum *= 1;
+                        let temp = this.sentenceNum + 1;
+                        if (temp <= 50) { this.sentenceNum = temp };
+                    }
+                },
+                minusNum: function () {
+                    if (this.mode === "hanzi") {
+                        this.hanziNum *= 1;
+                        let temp = this.hanziNum - 1;
+                        if (temp >= 1) { this.hanziNum = temp };
+                    } else if (this.mode === "word") {
+                        this.wordNum *= 1;
+                        let temp = this.wordNum - 1;
+                        if (temp >= 1) { this.wordNum = temp };
+                    } else if (this.mode === "sentence") {
+                        this.sentenceNum *= 1;
+                        let temp = this.sentenceNum - 1;
+                        if (temp >= 1) { this.sentenceNum = temp };
+                    }
+                },
+            },
+            watch: {
+                hanziNum: function (val) {
+                    this.hanziNum *= 1;
+                    this.validate(val, 1000);
+                    if (this.hanziNum > 1000) { this.hanziNum = 1000 };
+                    if (this.hanziNum < 1) { this.hanziNum = 1 };
+                },
+                wordNum: function (val) {
+                    this.wordNum *= 1;
+                    this.validate(val, 1200);
+                    if (this.wordNum > 1200) { this.wordNum = 1200 };
+                    if (this.wordNum < 1) { this.wordNum = 1 };
+                },
+                sentenceNum: function (val) {
+                    this.sentenceNum *= 1;
+                    this.validate(val, 50);
+                    if (this.sentenceNum > 50) { this.sentenceNum = 50 };
+                    if (this.sentenceNum < 1) { this.sentenceNum = 1 };
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
